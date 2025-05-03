@@ -1,55 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин в Telegram</title>
-    <script>
-        !function(e){
-            var l=function(l){
-                return e.cookie.match(new RegExp("(?:^|; )digiseller-"+l+"=([^;]*)"))
-            },
-            i=l("lang"),
-            s=l("cart_uid"),
-            t=i?"?lang="+i[1]:"",
-            d=s?"&cart_uid="+s[1]:"",
-            r=e.getElementsByTagName("head")[0]||e.documentElement,
-            n=e.createElement("link"),
-            a=e.createElement("script");
-            n.type="text/css",n.rel="stylesheet",n.id="digiseller-css",
-            n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1014228",
-            a.async=!0,a.id="digiseller-js",
-            a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1014228"+t+d,
-            !e.getElementById(n.id)&&r.appendChild(n),
-            !e.getElementById(a.id)&&r.appendChild(a)
-        }(document);
-    </script>
+    <title>Мой магазин Digiseller</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px;
-            background: #f9f9f9;
+            padding: 20px;
+            background: #f5f5f5;
         }
         .container {
-            max-width: 100%;
+            max-width: 1000px;
             margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        /* Адаптация виджета */
+        #digiseller-body {
+            min-height: 600px;
+        }
+        @media (max-width: 768px) {
+            #digiseller-body {
+                min-height: 800px; /* Увеличиваем высоту для мобильных */
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>🎮 Магазин игр</h2>
-        <div class="digiseller-buy-standalone" 
-             data-id="4265358" 
-             data-owner="0" 
-             data-lang="" 
-             data-img="1" 
-             data-img-size="180" 
-             data-name="1" 
-             data-price="1" 
-             data-no-price="0">
-        </div>
+        <h1>Добро пожаловать в магазин!</h1>
+        <p style="text-align: center;">Безопасная оплата через Digiseller</p>
+        
+        <!-- Виджет Digiseller -->
+        <span class="digiseller-body" id="digiseller-body" 
+              data-partner-id="" 
+              data-cat="v" 
+              data-logo="1" 
+              data-downmenu="1" 
+              data-purchases="1" 
+              data-langs="1" 
+              data-cart="1" 
+              data-search="0"></span>
+
+        <!-- Скрипт Digiseller (загружается асинхронно) -->
+        <script>
+            !function(e){
+                var l=function(l){
+                    return e.cookie.match(new RegExp("(?:^|; )digiseller-"+l+"=([^;]*)"))
+                },
+                i=l("lang"),
+                s=l("cart_uid"),
+                t=i?"&lang="+i[1]:"",
+                d=s?"&cart_uid="+s[1]:"",
+                r=e.getElementsByTagName("head")[0]||e.documentElement,
+                n=e.createElement("link"),
+                a=e.createElement("script");
+                
+                n.type="text/css";
+                n.rel="stylesheet";
+                n.id="digiseller-css";
+                n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1014228";
+                
+                a.async=!0;
+                a.id="digiseller-js";
+                a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1014228"+t+d;
+                
+                !e.getElementById(n.id)&&r.appendChild(n);
+                !e.getElementById(a.id)&&r.appendChild(a);
+            }(document);
+        </script>
     </div>
 </body>
 </html>
